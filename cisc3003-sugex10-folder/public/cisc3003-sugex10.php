@@ -1,0 +1,154 @@
+<?php
+
+include 'includes/book-utilities.inc.php';
+$customers = readCustomers();
+$books = readBooks();
+$orders = readOrders();
+
+$customerId = isset($_GET['customer']) ? $_GET['customer'] : null;
+$selectedCustomer = null;
+if ($customerId) {
+    foreach ($customers as $c) {
+        if ($c[0] == $customerId) {
+            $selectedCustomer = $c;
+            break;
+        }
+    }
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CISC3003 Suggested Exercise 10</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css">
+    <link rel="stylesheet" href="css/material.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <script   src="https://code.jquery.com/jquery-1.7.2.min.js" ></script>
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script src="js/jquery.sparkline.2.1.2.js"></script>
+    
+  
+</head>
+
+<body>
+    
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+            mdl-layout--fixed-header">
+            
+    <?php include 'includes/header.inc.php'; ?>
+    <?php include 'includes/left-nav.inc.php'; ?>
+    
+    <main class="mdl-layout__content mdl-color--grey-50">
+        <section class="page-content">
+
+            <div class="mdl-grid">
+
+              <!-- mdl-cell + mdl-card -->
+              <div class="mdl-cell mdl-cell--7-col card-lesson mdl-card  mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-color--orange">
+                  <h2 class="mdl-card__title-text">Customers</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <table class="mdl-data-table  mdl-shadow--2dp">
+                      <thead>
+                        <tr>
+                          <th class="mdl-data-table__cell--non-numeric">Name</th>
+                          <th class="mdl-data-table__cell--non-numeric">University</th>
+                          <th class="mdl-data-table__cell--non-numeric">City</th>
+                          <th>Sales</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php foreach ($customers as $c): ?>
+                        <tr>
+                          <td class="mdl-data-table__cell--non-numeric"><a href="?customer=<?= $c[0] ?>"><?= $c[1] . ' ' . $c[2] ?></a></td>
+                          <td class="mdl-data-table__cell--non-numeric"><?= $c[4] ?></td>
+                          <td class="mdl-data-table__cell--non-numeric"><?= $c[6] ?></td>
+                          <td><span class="sparkbar"><?= isset($c[11]) ? trim($c[11]) : '' ?></span></td>
+                        </tr>
+                      <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                </div>
+              </div>  <!-- / mdl-cell + mdl-card -->
+              
+              
+            <div class="mdl-grid mdl-cell--5-col">
+    
+
+       
+                  <!-- mdl-cell + mdl-card -->
+                  <div class="mdl-cell mdl-cell--12-col card-lesson mdl-card  mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-color--deep-purple mdl-color-text--white">
+                      <h2 class="mdl-card__title-text">Customer Details</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <?php if ($selectedCustomer): ?>
+                        <h4><?= $selectedCustomer[1] . ' ' . $selectedCustomer[2] ?></h4>
+                        <?= $selectedCustomer[4] ?><br>
+                        <?= $selectedCustomer[5] ?><br>
+                        <?= $selectedCustomer[6] ?><?= !empty($selectedCustomer[7]) ? ', ' . $selectedCustomer[7] : '' ?>, <?= $selectedCustomer[8] ?> <?= $selectedCustomer[9] ?>
+                        <?php else: ?>
+                        <h4>Select a customer to view details</h4>
+                        <?php endif; ?>
+                    </div>    
+                  </div>  <!-- / mdl-cell + mdl-card -->   
+
+                  <!-- mdl-cell + mdl-card -->
+                  <div class="mdl-cell mdl-cell--12-col card-lesson mdl-card  mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-color--deep-purple mdl-color-text--white">
+                      <h2 class="mdl-card__title-text">Order Details</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">       
+                        <?php if ($selectedCustomer): ?>
+                        <table class="mdl-data-table  mdl-shadow--2dp">
+                          <thead>
+                            <tr>
+                              <th class="mdl-data-table__cell--non-numeric">Cover</th>
+                              <th class="mdl-data-table__cell--non-numeric">ISBN</th>
+                              <th class="mdl-data-table__cell--non-numeric">Title</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <?php foreach ($orders as $o): ?>
+                            <?php if ($o[1] == $selectedCustomer[0]): ?>
+                            <tr>
+                              <td class="mdl-data-table__cell--non-numeric"><img src="images/tinysquare/<?= $o[2] ?>.jpg" alt="<?= $o[2] ?>" /></td>
+                              <td class="mdl-data-table__cell--non-numeric"><?= $o[2] ?></td>
+                              <td class="mdl-data-table__cell--non-numeric"><?= isset($books[$o[2]]) ? $books[$o[2]]['title'] : $o[3] ?></td>
+                            </tr>
+                            <?php endif; ?>
+                          <?php endforeach; ?>
+                          </tbody>
+                        </table>
+                        <?php else: ?>
+                        <p>Select a customer to view their orders.</p>
+                        <?php endif; ?>
+                    </div>    
+                   </div>  <!-- / mdl-cell + mdl-card -->             
+
+
+               </div>   
+           
+           
+            </div>  <!-- / mdl-grid -->    
+
+        </section>
+    </main>    
+</div>    <!-- / mdl-layout --> 
+          
+</body>
+<script>
+$(function() {
+    $('.sparkbar').sparkline('html', {type: 'bar', barColor: '#f39c12'} );
+});
+</script>
+</html>
