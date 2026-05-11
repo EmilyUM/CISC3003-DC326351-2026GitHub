@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>CISC3003: Practice 04</title>
+    
+    <!-- 引入Google字体 -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/cisc3003-practice04-after.css">
+</head>
+<body>
+    <header>
+        <h1>Share Your Travels</h1>
+        <p>Let us know where you've been</p>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Photo Details</h2>
+            <form action="process.php" method="post">
+                <table>
+                    <tr>
+                        <td><label for="title">Title:</label></td>
+                        <td>
+                            <input type="text" id="title" name="title" 
+                                   placeholder="Give your photo a descriptive name" 
+                                   size="50">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="description">Description:</label></td>
+                        <td>
+                            <textarea id="description" name="description" 
+                                      rows="5" cols="61"
+                                      placeholder="Adding a rich description will help with search results"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="continent">Continent:</label></td>
+                        <td>
+                            <select id="continent" name="continent">
+                                <option value="">Choose continent</option>
+                                <option value="africa">Africa</option>
+                                <option value="asia">Asia</option>
+                                <option value="europe">Europe</option>
+                                <option value="north-america">North America</option>
+                                <option value="south-america">South America</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="country">Country:</label></td>
+                        <td>
+                            <select id="country" name="country">
+                                <option value="">Choose country</option>
+                                <option value="canada">Canada</option>
+                                <option value="mexico">Mexico</option>
+                                <option value="usa">United States</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="city">City:</label></td>
+                        <td>
+                            <select id="city" name="city">
+                                <option value="">Choose city</option>
+                                <option value="calgary">Calgary</option>
+                                <option value="montreal">Montreal</option>
+                                <option value="toronto">Toronto</option>
+                                <option value="vancouver">Vancouver</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Copyright:</label></td>
+                        <td>
+                            <input type="checkbox" id="copyright" name="copyright" value="1">
+                            <label for="copyright" style="display:inline;">I own the copyright</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Creative Commons<br>License:</label></td>
+                        <td>
+                            <div>
+                                <input type="checkbox" id="cc-attribution" name="cc[]" value="attribution">
+                                <label for="cc-attribution" style="display:inline;">Attribution</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cc-noncommercial" name="cc[]" value="noncommercial">
+                                <label for="cc-noncommercial" style="display:inline;">Noncommercial</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cc-noderivative" name="cc[]" value="noderivative">
+                                <label for="cc-noderivative" style="display:inline;">No Derivative Works</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>License Agreement:</label></td>
+                        <td>
+                            <input type="checkbox" id="license" name="license" value="1">
+                            <label for="license" style="display:inline;">Accept the software license</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="rating">Rate this photo:</label></td>
+                        <td>
+                            <input type="number" id="rating" name="rating" min="1" max="5" value="3">
+                            (1 = Poor, 5 = Excellent)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="color">Color Collection:</label></td>
+                        <td>
+                            <input type="color" id="color" name="color" value="#000000">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="date">Date Taken:</label></td>
+                        <td>
+                            <input type="date" id="date" name="date">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="time">Time Taken:</label></td>
+                        <td>
+                            <input type="time" id="time" name="time">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="padding-top: 20px;">
+                            <input type="submit" value="Submit" class="rounded">
+                            <input type="reset" value="Clear Form" class="rounded">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

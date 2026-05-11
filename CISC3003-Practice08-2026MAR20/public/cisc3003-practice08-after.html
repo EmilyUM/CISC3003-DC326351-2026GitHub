@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CISC3003 Practice 08</title>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="tiled">
+    <header>
+        <h1>Art Filters</h1>
+    </header>
+    <main>
+        <div id="sliderBox">
+            <form>
+                <p><label>Opacity: </label><input type="range" id="sliderOpacity" min="0" max="100" value="100" class="sliders" /> <span id="numOpacity">100</span>%</p>
+                <p><label>Saturation: </label><input type="range" id="sliderSaturation" min="1" max="300" value="100" class="sliders"/> <span id="numSaturation">100</span>%</p>
+                <p><label>Brightness: </label><input type="range" id="sliderBrightness" min="0" max="300" value="100" class="sliders" /> <span id="numBrightness">100</span>%</p>
+                <p><label>Hue Rotate: </label><input type="range" id="sliderHue" min="0" max="360" value="0" class="sliders" /> <span id="numHue">0</span>deg</p>
+                <p><label>Grayscale: </label><input type="range" id="sliderGray" min="0" max="100" value="0" class="sliders"/> <span id="numGray">0</span>%</p>
+                <p><label>Blur: </label><input type="range" id="sliderBlur" min="0" max="10" value="0" class="sliders" /> <span id="numBlur">0</span>px</p>
+                <p><button id="resetFilters">Reset</button></p>
+            </form>
+        </div>
+        <figure id="imgManipulated">
+            <img src="images/medium/painting1.jpg" id="mainImage">
+            <figcaption>
+                <em>Still Life with Flowers in a Glass Vase</em><br>
+                Jan Davidsz. de Heem, 1650 - 1683
+            </figcaption>
+        </figure>
+        <div id="thumbBox">
+            <div><img src="images/small/painting1.jpg" alt="Still Life with Flowers in a Glass Vase" title="Jan Davidsz. de Heem, 1650 - 1683"/></div>
+            <div><img src="images/small/painting2.jpg" alt="Portrait of Alida Christina Assink" title="Jan Adam Kruseman, 1833"/></div>
+            <div><img src="images/small/painting3.jpg" alt="Self-portrait" title="Vincent van Gogh, 1887"/></div>
+            <div><img src="images/small/painting4.jpg" alt="William II, Prince of Orange, and his Bride, Mary Stuart" title="Anthony van Dyck, 1641"/></div>
+            <div><img src="images/small/painting5.jpg" alt="Milkmaid" title="Johannes Vermeer, c. 1660"/></div>
+        </div>
+    </main>
+    <script>
+        const mainImage = document.getElementById('mainImage');
+        const thumbnails = document.querySelectorAll('#thumbBox img');
+        const resetButton = document.getElementById('resetFilters');
+        
+        const sliders = {
+            opacity: {
+                slider: document.getElementById('sliderOpacity'),
+                display: document.getElementById('numOpacity'),
+                unit: '%'
+            },
+            saturation: {
+                slider: document.getElementById('sliderSaturation'),
+                display: document.getElementById('numSaturation'),
+                unit: '%'
+            },
+            brightness: {
+                slider: document.getElementById('sliderBrightness'),
+                display: document.getElementById('numBrightness'),
+                unit: '%'
+            },
+            hue: {
+                slider: document.getElementById('sliderHue'),
+                display: document.getElementById('numHue'),
+                unit: 'deg'
+            },
+            grayscale: {
+                slider: document.getElementById('sliderGray'),
+                display: document.getElementById('numGray'),
+                unit: '%'
+            },
+            blur: {
+                slider: document.getElementById('sliderBlur'),
+                display: document.getElementById('numBlur'),
+                unit: 'px'
+            }
+        };
+
+        function updateFilters() {
+            const filterString = `
+                opacity(${sliders.opacity.slider.value / 100})
+                saturate(${sliders.saturation.slider.value / 100})
+                brightness(${sliders.brightness.slider.value / 100})
+                hue-rotate(${sliders.hue.slider.value}deg)
+                grayscale(${sliders.grayscale.slider.value}%)
+                blur(${sliders.blur.slider.value}px)
+            `.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+            
+            mainImage.style.filter = filterString;
+            
+            for (const key in sliders) {
+                sliders[key].display.textContent = sliders[key].slider.value;
+            }
+        }
+
+        for (const key in sliders) {
+            sliders[key].slider.addEventListener('input', updateFilters);
+        }
+        
+        resetButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            sliders.opacity.slider.value = 100;
+            sliders.saturation.slider.value = 100;
+            sliders.brightness.slider.value = 100;
+            sliders.hue.slider.value = 0;
+            sliders.grayscale.slider.value = 0;
+            sliders.blur.slider.value = 0;
+            
+            updateFilters();
+        });
+        
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                const smallSrc = this.getAttribute('src');
+                const fileName = smallSrc.split('/').pop();
+                
+                mainImage.setAttribute('src', `images/medium/${fileName}`);
+                
+
+                const caption = mainImage.nextElementSibling;
+                const altText = this.getAttribute('alt');
+                const titleText = this.getAttribute('title');
+                
+                caption.innerHTML = `<em>${altText}</em><br>${titleText}`;
+
+                resetButton.click();
+            });
+        });
+
+        updateFilters();
+    </script>
+</body>
+</html>
