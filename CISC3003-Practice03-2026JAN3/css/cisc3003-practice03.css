@@ -1,0 +1,176 @@
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    line-height: 1.6;
+    color: #333;
+    background-color: #C5CAE9;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Arial, Helvetica, sans-serif; 
+    font-weight: bold;
+}
+
+a {
+    color: #00B0FF;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #F50057;
+    color: white;
+    padding: 0.1em 0.3em;
+}
+
+
+header {
+    color: white;
+    background-color: #1A237E;
+    margin: 0 4em 0.25em 4em;
+    padding: 1em;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 0.3em;
+}
+
+header p {
+    font-size: 1.1em;
+    margin-bottom: 1em;
+    font-style: italic;
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    font-weight: bold;
+    padding: 0.3em 0.8em;
+}
+
+nav a:hover {
+    background-color: #F50057;
+    color: white;
+}
+
+main {
+    margin: 0 4em;
+    padding: 1em 0;
+    background-color: white; 
+    padding: 1em; 
+
+}
+
+#description h2 {
+    font-size: 1.8em;
+    color: #1A237E;
+    border-bottom: 2px solid #C5CAE9; 
+    padding-bottom: 0.3em;
+    margin-bottom: 0.8em;
+    background-color: #7986BC;
+    color: white; 
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+figure {
+    text-align: center;
+    margin: 1em 0;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+figcaption {
+    font-style: italic;
+    color: #666;
+    margin-top: 0.5em;
+}
+
+#related-photos h2 {
+    font-size: 1.5em;
+    color: #1A237E;
+    border-bottom: 2px solid #C5CAE9; 
+    padding-bottom: 0.3em;
+    margin-bottom: 0.8em;
+    background-color: #7986BC; 
+    color: white; 
+    padding: 0.5em; 
+    margin-bottom: 1em; 
+}
+
+#related-photos > div {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+#related-photos img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+
+
+#reviews h3 {
+    font-size: 1.5em;
+    color: #1A237E;
+    border-bottom: 2px solid #C5CAE9; 
+    padding-bottom: 0.3em;
+    margin-bottom: 0.8em;
+    background-color: #7986BC; 
+    color: white;
+    padding: 0.5em;
+    margin-bottom: 1em; 
+}
+
+#reviews > div {
+    border-left: 4px solid #7986CB; 
+    padding-left: 1em;
+    margin-bottom: 1em;
+}
+
+.byline {
+    font-weight: bold;
+    color: #7986CB
+}
+
+time {
+    font-style: italic;
+    color: #FF80AB
+}
+
+
+footer {
+    color: white;
+    background-color: #1A237E;
+    margin: 0 4em 0.25em 4em;
+    padding: 1em;
+    text-align: center;
+}
+
+footer p {
+    margin: 0.3em 0;
+}
+
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    background-color: #F50057;
+    color: white;
+}
