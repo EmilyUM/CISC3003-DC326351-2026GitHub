@@ -1,0 +1,11 @@
+# Local-only secrets/config
+/php/config.local.php
+
+# Composer
+/vendor/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
